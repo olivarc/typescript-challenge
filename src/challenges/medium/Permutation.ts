@@ -19,7 +19,9 @@
 
 
 // Union Array. Idea, union types are distributed: https://www.typescriptlang.org/docs/handbook/advanced-types.html#distributive-conditional-types
-// and never type is empty union
+// and never type is empty union.
+// The second generic type is only used to exclude and catch the first one
+// Explanation: https://github.com/type-challenges/type-challenges/issues/614
 type Permutation<X,Y=X> = [X] extends [never] 
   ? [] 
   : Y extends Y ? [Y, ...Permutation<Exclude<X, Y>>] : never;
