@@ -17,16 +17,12 @@
 
 /* _____________ Your Code Here _____________ */
 
-type UnionArray<T> = T extends `${infer A}` 
-? [A] 
-: T extends never 
-    ? []
-    : T extends  `${infer Head}` | infer Tail ? [Head,  ...UnionArray<Tail>] : never;
 
-type Permutation<T> = T extends `${infer A}` 
-? [A] 
-: T extends  `${infer Head}` | infer Tail ? [Head, ] : never;
-
+// Union Array. Idea, union types are distributed: https://www.typescriptlang.org/docs/handbook/advanced-types.html#distributive-conditional-types
+// and never type is empty union
+type Permutation<X,Y=X> = [X] extends [never] 
+  ? [] 
+  : Y extends Y ? [Y, ...Permutation<Exclude<X, Y>>] : never;
 
 /* _____________ Test Cases _____________ */
 import { Equal, Expect } from '../../utils'
