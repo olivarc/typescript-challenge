@@ -16,7 +16,7 @@
 type CamelCase<S> = S extends `${infer Left}-${infer Right}` ? Capitalize<Right> extends Right ? `${Left}-${CamelCase<Right>}` : `${Left}${Capitalize<CamelCase<Right>>}` : S
 
 /* _____________ Test Cases _____________ */
-import { Equal, Expect } from '@type-challenges/utils'
+import { Equal, Expect } from '../../utils'
 
 type cases = [
   Expect<Equal<CamelCase<'foo-bar-baz'>, 'fooBarBaz'>>,
