@@ -20,12 +20,10 @@
 
 /* _____________ Your Code Here _____________ */
 
-type AppendToObject<T, U, V> = U extends `${infer Property}` 
-    ? { [key in keyof (T & { [key in Property]: V } )]: key extends keyof T ? T[key] : V }  
-    : never
+type AppendToObject<T, U extends string, V> = { [key in keyof (T & { [key in`${U}`] : V })] : key extends keyof T ? T[key] : V }
 
 /* _____________ Test Cases _____________ */
-import { Equal, Expect } from '../../utils'
+import { Equal, Expect } from '../..//utils'
 
 type test1 = {
   key: 'cat'
